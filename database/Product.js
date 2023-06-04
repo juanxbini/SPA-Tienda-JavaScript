@@ -1,72 +1,81 @@
-import connection from './Connection.js'; // Importa la biblioteca de conexión a la base de datos SQL
+import connection from './Connection.js';
 
 class Product {
-  constructor(id, nombre, precio, categoria) {
-    this.id = id;
-    this.nombre = nombre;
-    this.precio = precio;
-    this.categoria = categoria;
-  }
 
-  static getAllProducts(callback) {
-    // Consulta para obtener todos los productos
-    const query = 'SELECT * FROM products';
+  // Método para listar todos los productos
+  async listProducts() {
+    return new Promise((resolve, reject) => {
+      const query = 'SELECT * FROM products';
 
-    // Ejecuta la consulta
-    connection.query(query, (err, results) => {
-      if (err) {
-        callback(err, null);
-        return;
-      }
-
-      // Transforma los resultados en instancias de la clase Product
-      const products = results.map((row) => {
-        return new Product(row.id, row.nombre, row.precio, row.categoria);
+      connection.query(query, (error, results) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(results);
+        }
       });
-
-      callback(null, products);
     });
   }
 
-  static getProductsByCategory(category, callback) {
-    // Consulta para obtener productos según la categoría seleccionada
-    const query = `SELECT * FROM products WHERE categoria = ${category}`;
+  // Método para obtener un producto por su id
+  async oneProduct(id) {
+    return new Promise((resolve, reject) => {
+      const query = 'SELECT * FROM products WHERE id = ?';
 
-    // Ejecuta la consulta con la categoría como parámetro
-    connection.query(query, [category], (err, results) => {
-      if (err) {
-        callback(err, null);
-        return;
-      }
-
-      // Transforma los resultados en instancias de la clase Product
-      const products = results.map((row) => {
-        return new Product(row.id, row.nombre, row.precio, row.categoria);
+      connection.query(query, [id], (error, results) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(results[0]);
+        }
       });
-
-      callback(null, products);
     });
   }
+  // Método para obtener productos con descuento
+  async getDiscountedProducts() {
+    return new Promise((resolve, reject) => {
+      const query = 'SELECT * FROM products WHERE descuento IS NOT NULL';
 
-  static sortProductsBy(field, direction, callback) {
-    // Consulta para ordenar productos según el campo y dirección especificados
-    const query = `SELECT * FROM products ORDER BY ${field} ${direction}`;
-
-    // Ejecuta la consulta
-    connection.query(query, (err, results) => {
-      if (err) {
-        callback(err, null);
-        return;
-      }
-
-      // Transforma los resultados en instancias de la clase Product
-      const products = results.map((row) => {
-        return new Product(row.id, row.nombre, row.precio, row.categoria);
+      connection.query(query, (error, results) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(results);
+        }
       });
+    });
+  }
+  //Metodo para obtener los productos segun su categoria
+  async getProductsByCategory(category) {
+    return new Promise((resolve, reject) => {
+      const query = 'SELECT * FROM products WHERE categoria = ?';
 
-      callback(null, products);
+      connection.query(query, [category], (error, results) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(results);
+        }
+      });
+    });
+  }
+  //Metodo para obtener los ultimos productos agregados
+  async getLatestProducts(limit) {
+    return new Promise((resolve, reject) => {
+      const query = 'SELECT * FROM products ORDER BY id DESC LIMIT ?';
+
+      connection.query(query, [+limit], (error, results) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(results);
+        }
+      });
     });
   }
 }
 
 export default Product;
+
+
+

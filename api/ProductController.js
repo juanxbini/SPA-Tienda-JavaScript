@@ -1,54 +1,125 @@
-import Product from '../database/Product'; // Importa la clase Product del modelo
-import connection from '../database/connection'; // Importa la biblioteca de conexión a la base de datos SQL
+import Product from '../database/Product.js';
 
 class ProductController {
-  static getProductById(req, res) {
+  // Método para obtener todos los productos
+  async getAllProducts(req, res) {
+    try {
+      const productModel = new Product();
+      const products = await productModel.listProducts();
+
+      // Serializar los productos seleccionando las propiedades deseadas
+      const serializedProducts = products.map((product) => ({
+        id: product.id,
+        nombre: product.nombre,
+        precio: product.precio,
+        categoria: product.categoria,
+        stock: product.stock,
+        descuento: product.descuento
+      }));
+
+      res.setHeader('Content-Type', 'application/json');
+      res.send(JSON.stringify(serializedProducts));
+    } catch (error) {
+      console.error('Error al obtener los productos:', error);
+      res.status(500).json({ error: 'Error al obtener los productos' });
+    }
+  }
+
+  // Método para obtener un producto por su id
+  async getProductById(req, res) {
     const { id } = req.params;
 
-    // Utiliza el método estático del modelo para buscar un producto por ID
-    Product.getProductById(id, (err, product) => {
-      if (err) {
-        console.error('Error al buscar el producto:', err);
-        res.status(500).json({ error: 'Error al buscar el producto' });
-        return;
-      }
+    try {
+      const productModel = new Product();
+      const product = await productModel.oneProduct(id);
 
       if (!product) {
         res.status(404).json({ error: 'Producto no encontrado' });
-        return;
+      } else {
+        res.setHeader('Content-Type', 'application/json');
+        res.send(JSON.stringify(product));
       }
-
-      res.json(product);
-    });
+    } catch (error) {
+      console.error('Error al obtener el producto:', error);
+      res.status(500).json({ error: 'Error al obtener el producto' });
+    }
   }
+  // Método para obtener productos con descuento
+  async getDiscountedProducts(req, res) {
+    try {
+      const productModel = new Product();
+      const products = await productModel.getDiscountedProducts();
 
-  static getAllProducts(req, res) {
-    // Utiliza el método estático del modelo para obtener todos los productos
-    Product.getAllProducts((err, products) => {
-      if (err) {
-        console.error('Error al obtener los productos:', err);
-        res.status(500).json({ error: 'Error al obtener los productos' });
-        return;
-      }
+      const serializedProducts = products.map((product) => ({
+        id: product.id,
+        nombre: product.nombre,
+        precio: product.precio,
+        categoria: product.categoria,
+        descuento: product.descuento,
+      }));
 
-      res.json(products);
-    });
+      res.setHeader('Content-Type', 'application/json');
+      res.send(JSON.stringify(serializedProducts));
+    } catch (error) {
+      console.error('Error al obtener los productos con descuento:', error);
+      res.status(500).json({ error: 'Error al obtener los productos con descuento' });
+    }
   }
-
-  static getProductsByCategory(req, res) {
+  // Método para obtener productos segun su categoria
+  async getProductsByCategory(req, res) {
     const { category } = req.params;
 
-    // Utiliza el método estático del modelo para obtener productos por categoría
-    Product.getProductsByCategory(category, (err, products) => {
-      if (err) {
-        console.error('Error al obtener los productos por categoría:', err);
-        res.status(500).json({ error: 'Error al obtener los productos por categoría' });
-        return;
-      }
+    try {
+      const productModel = new Product();
+      const products = await productModel.getProductsByCategory(category);
 
-      res.json(products);
-    });
+      if (products.length === 0) {
+        res.status(404).json({ error: 'No se encontraron productos en esta categoría' });
+      } else {
+        const serializedProducts = products.map((product) => ({
+          id: product.id,
+          nombre: product.nombre,
+          precio: product.precio,
+          categoria: product.categoria,
+        }));
+
+        res.setHeader('Content-Type', 'application/json');
+        res.send(JSON.stringify(serializedProducts));
+      }
+    } catch (error) {
+      console.error('Error al obtener los productos por categoría:', error);
+      res.status(500).json({ error: 'Error al obtener los productos por categoría' });
+    }
+  }
+  //metodo para obtener los ultimos productos agregados
+  async getLatestProducts(req, res) {
+    const { limit } = req.params;
+
+    try {
+      const productModel = new Product();
+      const products = await productModel.getLatestProducts(limit);
+
+      if (products.length === 0) {
+        res.status(404).json({ error: 'No se encontraron productos' });
+      } else {
+        const serializedProducts = products.map((product) => ({
+          id: product.id,
+          nombre: product.nombre,
+          precio: product.precio,
+          categoria: product.categoria,
+        }));
+
+        res.setHeader('Content-Type', 'application/json');
+        res.send(JSON.stringify(serializedProducts));
+      }
+    } catch (error) {
+      console.error('Error al obtener los últimos productos:', error);
+      res.status(500).json({ error: 'Error al obtener los últimos productos' });
+    }
   }
 }
 
 export default ProductController;
+
+
+

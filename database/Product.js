@@ -2,6 +2,18 @@ import connection from './Connection.js';
 
 class Product {
 
+  //Metodo para serializar productos
+  serializeProduct(product) {
+    return {
+      id: product.id,
+      nombre: product.nombre,
+      precio: product.precio,
+      categoria: product.categoria,
+      descuento: product.descuento,
+      stock: product.stock
+    };
+  }
+
   // Método para listar todos los productos
   async listProducts() {
     return new Promise((resolve, reject) => {

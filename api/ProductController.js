@@ -8,14 +8,7 @@ class ProductController {
       const products = await productModel.listProducts();
 
       // Serializar los productos seleccionando las propiedades deseadas
-      const serializedProducts = products.map((product) => ({
-        id: product.id,
-        nombre: product.nombre,
-        precio: product.precio,
-        categoria: product.categoria,
-        stock: product.stock,
-        descuento: product.descuento
-      }));
+      const serializedProducts = products.map((product) => productModel.serializeProduct(product));
 
       res.setHeader('Content-Type', 'application/json');
       res.send(JSON.stringify(serializedProducts));
@@ -50,13 +43,8 @@ class ProductController {
       const productModel = new Product();
       const products = await productModel.getDiscountedProducts();
 
-      const serializedProducts = products.map((product) => ({
-        id: product.id,
-        nombre: product.nombre,
-        precio: product.precio,
-        categoria: product.categoria,
-        descuento: product.descuento,
-      }));
+      // Serializar los productos seleccionando las propiedades deseadas
+      const serializedProducts = products.map((product) => productModel.serializeProduct(product));
 
       res.setHeader('Content-Type', 'application/json');
       res.send(JSON.stringify(serializedProducts));
@@ -76,12 +64,8 @@ class ProductController {
       if (products.length === 0) {
         res.status(404).json({ error: 'No se encontraron productos en esta categoría' });
       } else {
-        const serializedProducts = products.map((product) => ({
-          id: product.id,
-          nombre: product.nombre,
-          precio: product.precio,
-          categoria: product.categoria,
-        }));
+        // Serializar los productos seleccionando las propiedades deseadas
+        const serializedProducts = products.map((product) => productModel.serializeProduct(product));
 
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(serializedProducts));
@@ -102,12 +86,8 @@ class ProductController {
       if (products.length === 0) {
         res.status(404).json({ error: 'No se encontraron productos' });
       } else {
-        const serializedProducts = products.map((product) => ({
-          id: product.id,
-          nombre: product.nombre,
-          precio: product.precio,
-          categoria: product.categoria,
-        }));
+        // Serializar los productos seleccionando las propiedades deseadas
+        const serializedProducts = products.map((product) => productModel.serializeProduct(product));
 
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(serializedProducts));

@@ -1,7 +1,6 @@
-export class ProductosController {
-    index() {
-      console.log('PRODUCTOS');
-      // Acciones para la sección Productos
-    }
+export class ProductView {
+  render() {
+    // Renderiza la vista de la sección Product
   }
+}
   

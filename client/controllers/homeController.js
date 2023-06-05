@@ -1,12 +1,13 @@
-import { HomeView } from "../views/homeView";
+import { HomeView } from "../views/homeView.js";
 
 
 export class HomeController {
+  constructor(){
+    this.homeView = new HomeView()
+  }
     index() {
-      console.log('HOME');
       // Acciones para la sección Home
-      const homeView = new HomeView();
-      homeView.render()
+      this.homeView.render()
     }
   }
   

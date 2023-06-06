@@ -3,6 +3,8 @@
   <p>¡Descubre nuestras últimas novedades y promociones!</p>
 
   <!-- Renderizar otras secciones aquí -->
-  {{> partials/latest-article-template}}
-  {{> partials/promotional-product-template}}
+  {{#each sections}}
+    {{sectionTemplate}}
+  {{/each}}
 </div>
+

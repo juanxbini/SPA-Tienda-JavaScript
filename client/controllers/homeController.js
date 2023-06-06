@@ -6,7 +6,7 @@ export class HomeController {
   constructor() {
     this.homeView = new HomeView(),
     this.utils = new Utils(),
-    this.productModel = new ProductModel('http:/localhost:3000')
+    this.productModel = new ProductModel('http:/localhost:3000/api')
   }
   index() {
     // Acciones para la sección Home

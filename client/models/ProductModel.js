@@ -5,31 +5,31 @@ export class ProductModel {
   
     // Realiza una solicitud GET a la ruta '/discounted' para obtener los productos con descuento
     async getDiscountedProducts() {
-      const url = `${this.apiUrl}/discounted`;
+      const url = `${this.apiUrl}/product/discounted`;
       return this.fetchData(url);
     }
   
     // Realiza una solicitud GET a la ruta '/category/:category' para obtener los productos por categoría
     async getProductsByCategory(category) {
-      const url = `${this.apiUrl}/category/${category}`;
+      const url = `${this.apiUrl}/product/category/${category}`;
       return this.fetchData(url);
     }
   
     // Realiza una solicitud GET a la ruta '/latest/:limit' para obtener los productos más recientes
     async getLatestProducts(limit) {
-      const url = `${this.apiUrl}/latest/${limit}`;
+      const url = `${this.apiUrl}/product/latest/${limit}`;
       return this.fetchData(url);
     }
   
     // Realiza una solicitud GET a la ruta '/:id' para obtener un producto por su ID
     async getProductById(id) {
-      const url = `${this.apiUrl}/${id}`;
+      const url = `${this.apiUrl}/product/${id}`;
       return this.fetchData(url);
     }
   
     // Realiza una solicitud GET a la ruta '/' para obtener todos los productos
     async getAllProducts() {
-      const url = `${this.apiUrl}`;
+      const url = `${this.apiUrl}/product`;
       return this.fetchData(url);
     }
   

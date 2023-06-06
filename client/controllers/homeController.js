@@ -21,7 +21,7 @@ export class HomeController {
     const promotionalProducts = this.productModel.getDiscountedProducts();
 
     // Renderizar la sección Home una vez que los templates y los datos estén disponibles
-    Promise.all([homeTemplatePromise, latestArticleTemplatePromise, promotionalProductsTemplatePromise])
+    Promise.all([homeTemplatePromise, latestArticleTemplatePromise, promotionalProductsTemplatePromise, latestArticles,promotionalProducts])
       .then(([homeTemplateText, latestArticleTemplateText, promotionalProductsTemplateText]) => {
         console.log(latestArticles, promotionalProducts)
         this.homeView.render(homeTemplateText, latestArticleTemplateText, promotionalProductsTemplateText, latestArticles, promotionalProducts);

@@ -3,10 +3,11 @@ export class HomeView {
 
   render(homeTemplateText, latestArticleTemplateText, promotionalProductsTemplateText, latestArticles, promotionalProducts) {
     // Compilar los templates
+    console.log('FUNCION RENDER')
     const homeTemplate = Handlebars.compile(homeTemplateText);
     const latestArticleTemplate = Handlebars.compile(latestArticleTemplateText);
     const promotionalProductsTemplate = Handlebars.compile(promotionalProductsTemplateText);
-
+    
     // Renderizar los datos en los templates
     const latestArticleHtml = latestArticleTemplate({ articles: latestArticles });
     const promotionalProductsHtml = promotionalProductsTemplate({ products: promotionalProducts });

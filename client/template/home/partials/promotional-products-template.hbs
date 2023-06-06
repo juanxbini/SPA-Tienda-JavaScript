@@ -2,9 +2,11 @@
   <h3>Artículos en promoción</h3>
   <ul>
     {{#each products}}
+    <div class="card-discount">
       <li>{{this.nombre}} </li>
       <li>- Precio: {{this.precio}}</li>
       <li>- descuento: {{this.descuento}}</li>
+    </div>
     {{/each}}
   </ul>
 </div>

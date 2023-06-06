@@ -2,8 +2,11 @@
   <h3>Últimos artículos ingresados</h3>
   <ul>
     {{#each articles}}
+      <div class="card-latest">
       <li>{{this.nombre}}</li>
       <li>{{this.precio}}</li>
+      </div>
+
     {{/each}}
   </ul>
 </div>

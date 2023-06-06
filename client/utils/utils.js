@@ -1,7 +1,7 @@
 export class Utils {
 
     async fetchTemplate(url) {
-
+        
         return fetch(url)
           .then(response => {
             if (!response.ok) {

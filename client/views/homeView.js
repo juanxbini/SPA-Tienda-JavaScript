@@ -1,3 +1,4 @@
+
 export class HomeView {
 
   render(homeTemplateText, latestArticleTemplateText, promotionalProductsTemplateText, latestArticles, promotionalProducts) {

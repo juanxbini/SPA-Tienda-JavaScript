@@ -12,9 +12,9 @@ export class HomeController {
     // Acciones para la sección Home
 
     // Cargar los templates de las secciones
-    const homeTemplatePromise = this.utils.fetchTemplate('template/home/home-template.hbs');
-    const latestArticleTemplatePromise = this.utils.fetchTemplate('template/home/partials/latest-article-template.hbs');
-    const promotionalProductsTemplatePromise = this.utils.fetchTemplate('template/home/partials/promotional-products-template.hbs');
+    const homeTemplatePromise = this.utils.fetchTemplate('http://localhost/client/template/home/home-template.hbs');
+    const latestArticleTemplatePromise = this.utils.fetchTemplate('http://localhost/client/template/home/partials/latest-article-template.hbs');
+    const promotionalProductsTemplatePromise = this.utils.fetchTemplate('http://localhost/client/template/home/partials/promotional-products-template.hbs');
 
     // Obtener datos del modelo
     const latestArticles = this.productModel.getLatestProducts(5);

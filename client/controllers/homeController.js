@@ -23,6 +23,7 @@ export class HomeController {
     // Renderizar la sección Home una vez que los templates y los datos estén disponibles
     Promise.all([homeTemplatePromise, latestArticleTemplatePromise, promotionalProductsTemplatePromise])
       .then(([homeTemplateText, latestArticleTemplateText, promotionalProductsTemplateText]) => {
+        console.log(latestArticles, promotionalProducts)
         this.homeView.render(homeTemplateText, latestArticleTemplateText, promotionalProductsTemplateText, latestArticles, promotionalProducts);
       })
       .catch(error => {

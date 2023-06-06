@@ -17,7 +17,7 @@ export class HomeController {
     const promotionalProductsTemplatePromise = this.utils.fetchTemplate('template/home/promotional-products-template.hbs');
 
     // Obtener datos del modelo
-    const latestArticles = this.productModel.getLatestProducts();
+    const latestArticles = this.productModel.getLatestProducts(5);
     const promotionalProducts = this.productModel.getDiscountedProducts();
 
     // Renderizar la sección Home una vez que los templates y los datos estén disponibles

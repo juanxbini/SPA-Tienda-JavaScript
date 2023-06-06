@@ -1,4 +1,4 @@
-class ProductModel {
+export class ProductModel {
     constructor(apiUrl) {
       this.apiUrl = apiUrl;
     }
@@ -49,5 +49,5 @@ class ProductModel {
     }
   }
   
-  export default ProductModel;
+
   

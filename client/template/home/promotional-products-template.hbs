@@ -1,0 +1,10 @@
+<div class="promotional-products">
+  <h3>Artículos en promoción</h3>
+  <ul>
+    {{#each products}}
+      <li>{{this.nombre}} </li>
+      <li>- Precio: {{this.precio}}</li>
+      <li>- descuento: {{this.descuento}}</li>
+    {{/each}}
+  </ul>
+</div>

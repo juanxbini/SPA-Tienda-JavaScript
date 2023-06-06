@@ -1,7 +1,6 @@
 export class Utils {
 
     async fetchTemplate(url) {
-        
         return fetch(url)
           .then(response => {
             if (!response.ok) {
@@ -13,4 +12,18 @@ export class Utils {
             console.error('Template fetch error:', error);
           });
       }
+
+    async fetchData(url) {
+      try {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error('Request failed');
+        }
+        const data = await response.json();
+        return data;
+      } catch (error) {
+        console.error('Error:', error.message);
+        throw error;
+      }
+    }
 }

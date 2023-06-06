@@ -1,0 +1,21 @@
+<div class="productos-section">
+  <h2>Productos</h2>
+
+  <!-- Navegación de categorías -->
+  <div class="categorias-navigation">
+    <ul>
+      {{#each categorias}}
+        <li><a href="#" data-categoria="{{this.nombre}}">{{this.nombre}}</a></li>
+      {{/each}}
+    </ul>
+  </div>
+
+  <!-- Contenedor de productos -->
+  <div class="productos-container">
+    <ul>
+      {{#each productos}}
+        <li>{{this.nombre}} - Precio: {{this.precio}}</li>
+      {{/each}}
+    </ul>
+  </div>
+</div>

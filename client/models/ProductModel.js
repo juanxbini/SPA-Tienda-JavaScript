@@ -1,6 +1,6 @@
 export class ProductModel {
-    constructor(apiUrl) {
-      this.apiUrl = apiUrl;
+    constructor() {
+      this.apiUrl = 'http:/localhost:3000/api'
     }
   
     // Realiza una solicitud GET a la ruta '/discounted' para obtener los productos con descuento

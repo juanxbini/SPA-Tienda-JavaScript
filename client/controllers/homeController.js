@@ -24,7 +24,8 @@ export class HomeController {
     Promise.all([homeTemplatePromise, latestArticleTemplatePromise, promotionalProductsTemplatePromise, latestArticles,promotionalProducts])
       .then(([homeTemplateText, latestArticleTemplateText, promotionalProductsTemplateText]) => {
         console.log(latestArticles, promotionalProducts)
-        this.homeView.render(homeTemplateText, latestArticleTemplateText, promotionalProductsTemplateText, latestArticles, promotionalProducts);
+        console.log('hola',homeTemplateText, latestArticleTemplateText,promotionalProductsTemplateText)
+        //this.homeView.render(homeTemplateText, latestArticleTemplateText, promotionalProductsTemplateText, latestArticles, promotionalProducts);
       })
       .catch(error => {
         console.error('Error al cargar los templates:', error);

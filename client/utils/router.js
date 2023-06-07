@@ -1,13 +1,13 @@
 import { HomeController } from '../controllers/homeController.js';
 import { ContactoController } from '../controllers/contactoController.js';
-import { ProductosController } from '../controllers/productosController.js';
+import { ProductController } from '../controllers/productosController.js';
 
 export class Router {
   constructor() {
     this.routes = {
       '/': HomeController,
       '/contacto': ContactoController,
-      '/productos': ProductosController,
+      '/productos': ProductController,
     };
   }
 
